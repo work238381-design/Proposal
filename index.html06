@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Anushka 💖</title>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff758c, #ffb199);
+        font-family: "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        width: 350px;
+    }
+
+    h1 {
+        color: #ff3b6f;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #333;
+        font-size: 16px;
+        line-height: 1.6;
+        min-height: 120px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+        display: none;
+    }
+
+    button {
+        padding: 12px 26px;
+        font-size: 16px;
+        margin: 8px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    #yes {
+        background: #ff3b6f;
+        color: white;
+        box-shadow: 0 6px 15px rgba(255,59,111,0.4);
+    }
+
+    #yes:hover {
+        transform: scale(1.05);
+    }
+
+    #no {
+        background: #ddd;
+        position: relative;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Anushka ❤️</h1>
+    <p id="text"></p>
+
+    <div class="buttons" id="buttons">
+        <button id="yes" onclick="yesClicked()">Yes 💖</button>
+        <button id="no" onmouseover="shrinkAndMove()">No 🙈</button>
+    </div>
+</div>
+
+<script>
+    const message = `
+I won’t make this long…
+
+But I want you to know this —
+
+Talking to you makes my ordinary days feel special.
+Your presence brings a smile I don’t even try to hide.
+
+So today, with all honesty in my heart…
+
+Will you be my Valentine? 💌
+`;
+
+    let index = 0;
+    const speed = 40;
+    const textElement = document.getElementById("text");
+
+    function typeText() {
+        if (index < message.length) {
+            textElement.innerHTML += message.charAt(index) === "\n" ? "<br>" : message.charAt(index);
+            index++;
+            setTimeout(typeText, speed);
+        } else {
+            document.getElementById("buttons").style.display = "block";
+        }
+    }
+
+    typeText();
+
+    let scale = 1;
+
+    function yesClicked() {
+        confetti({
+            particleCount: 250,
+            spread: 100,
+            origin: { y: 0.6 }
+        });
+
+        setTimeout(() => {
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                origin: { x: 0.2, y: 0.4 }
+            });
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                origin: { x: 0.8, y: 0.4 }
+            });
+        }, 400);
+
+        document.body.innerHTML = `
+            <div style="color:white; text-align:center;">
+                <h1>💖 She Said Yes 💖</h1>
+                <p style="font-size:18px;">
+                    Thank you, Anushka 🌹<br><br>
+                    This moment means more to me than words can say.
+                </p>
+                <p style="opacity:0.9;">— Kartik</p>
+            </div>
+        `;
+    }
+
+    function shrinkAndMove() {
+        const btn = document.getElementById("no");
+        scale -= 0.1;
+        if (scale < 0.3) scale = 0.3;
+
+        btn.style.transform = `scale(${scale})`;
+        btn.style.position = "absolute";
+        btn.style.left = Math.random() * 80 + "vw";
+        btn.style.top = Math.random() * 80 + "vh";
+    }
+</script>
+
+</body>
+</html>
